@@ -84,6 +84,40 @@ class Figuras():
 
         self.lineaDDA(color, x1, puntoCentroY-apotemaEstrella, x2, y2)
         self.lineaDDA(color, x1, y2, x2, puntoCentroY - apotemaEstrella)
-        self.lineaDDA(color, x1, puntoCentroY- apotemaEstrella, x2, puntoCentroY - apotemaEstrella)
+        self.lineaDDA(color, x1, puntoCentroY-apotemaEstrella, x2, puntoCentroY - apotemaEstrella)
+
+    def octagono(self, color, centroX, centroY, radio):
+
+        radioAux = int(radio / 2)
+
+        puntos = (
+            (centroX + radio, centroY - radioAux),
+            (centroX + radio, centroY + radioAux),
+
+            (centroX + radioAux, centroY + radio),
+            (centroX - radioAux, centroY + radio),
+
+            (centroX - radio, centroY + radioAux),
+            (centroX - radio, centroY - radioAux),
+
+            (centroX - radioAux, centroY - radio),
+            (centroX + radioAux, centroY - radio),
+
+        )
+
+        for i in range(0, len(puntos)):
+            if i+1 < len(puntos):
+                self.lineaDDA(color, puntos[i][0], puntos[i][1], puntos[i+1][0], puntos[i+1][1])
+            else:
+                self.lineaDDA(color, puntos[i][0], puntos[i][1], puntos[0][0], puntos[0][1])
+
+        # x, y
+        # y, x
+        # -y, x
+        # -x, y
+        # -x, -y
+        # -y, -x
+        # y, -x
+        # x, -y
 
 

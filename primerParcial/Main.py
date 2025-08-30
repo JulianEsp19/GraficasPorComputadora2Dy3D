@@ -4,7 +4,7 @@ import Colores as cl
 
 pygame.init()
 
-alto, ancho = 800, 600
+alto, ancho = 800, 800
 
 ventana = pygame.display.set_mode((ancho, alto))
 pygame.display.set_caption("Lineas")
@@ -29,6 +29,19 @@ while inicio:
     dibujador.hexagono(cl.ROJO, 150, 150, 400, 400)
 
     dibujador.estrella(cl.ROJO, 200, 200, 600, 600)
+
+    dibujador.octagono(cl.ROJO, 600, 600, 100)
+
+    # las coordenadas polares presentan un punto en el plano mediante:
+    # 1.- r = distancia del origen(radio)
+    # 2.- (simbolo angulo) = medido desde el eje x positivo
+    # 3.- en lugar de x, y se usa r, teta para convertir de polares a cartesiano
+    #
+    # x = r  * cos(angulo)
+    # y = r * sen(angulo)
+    # x2 = x0* r * cos(angulo)
+    # y2 =
+
 
     pygame.display.update()
 pygame.quit()
