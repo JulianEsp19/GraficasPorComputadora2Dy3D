@@ -57,9 +57,7 @@ class Figuras():
 
         apotema =  y2 - puntoCentroY
 
-        lado = 2 * apotema * math.tan(math.degrees(30))
-
-        print(lado)
+        lado = 2 * apotema * math.tan(math.radians(30))
 
         diferenciaX = int(((x2 - x1) - lado) / 2 if x2 > x1 else ((x1 - x2) - lado) / 2)
 
@@ -73,6 +71,38 @@ class Figuras():
         self.lineaDDA(color, x1, puntoCentroY, avanceX1, y1)
         self.lineaDDA(color, x1, puntoCentroY, avanceX1, y2)
 
+    def hexagonoCirculo(self, color, x1, y2, radio):
+        #sen = o    cos = a     tan = o
+        #      h          h           a
+
+        #primeros dos puntos del cuadrante superior
+        adyacente1 = int(math.cos(math.radians(72)) * radio)
+        opuesto1 = int(math.sin(math.radians(72)) * radio)
+
+        print("1.-", adyacente1, opuesto1)
+
+        # primeros dos puntos del cuadrante inferior
+        adyacente2 = int(math.cos(math.radians(54)) * radio)
+        opuesto2 = int(math.sin(math.radians(54)) * radio)
+
+        print("2.-", adyacente2, opuesto2)
+
+        puntos = (
+            (x1, y2 - radio),
+            (x1 + opuesto1, y2 - adyacente1),
+            (x1 + adyacente2, y2 + opuesto2),
+            (x1 - adyacente2, y2 + opuesto2),
+            (x1 - opuesto1, y2 - adyacente1)
+                  )
+
+
+
+        for i in range(0, len(puntos)):
+            if i+1 < len(puntos):
+                self.lineaDDA(color, puntos[i][0], puntos[i][1], puntos[i+1][0], puntos[i+1][1])
+            else:
+                self.lineaDDA(color, puntos[i][0], puntos[i][1], puntos[0][0], puntos[0][1])
+
     def estrella(self, color, x1, y1, x2, y2):
         puntoCentroX = int((x2 - x1) / 2 + x1 if x2 > x1 else (x1 - x2) / 2 + x2)
         puntoCentroY = int((y2 - y1) / 2 + y1 if y2 > y1 else (y1 - y2) / 2 + y2)
@@ -85,6 +115,35 @@ class Figuras():
         self.lineaDDA(color, x1, puntoCentroY-apotemaEstrella, x2, y2)
         self.lineaDDA(color, x1, y2, x2, puntoCentroY - apotemaEstrella)
         self.lineaDDA(color, x1, puntoCentroY-apotemaEstrella, x2, puntoCentroY - apotemaEstrella)
+
+    def estrellaCirculo(self, color, x1, y2, radio):
+        # primeros dos puntos del cuadrante superior
+        adyacente1 = int(math.cos(math.radians(72)) * radio)
+        opuesto1 = int(math.sin(math.radians(72)) * radio)
+
+        print("1.-", adyacente1, opuesto1)
+
+        # primeros dos puntos del cuadrante inferior
+        adyacente2 = int(math.cos(math.radians(54)) * radio)
+        opuesto2 = int(math.sin(math.radians(54)) * radio)
+
+        print("2.-", adyacente2, opuesto2)
+
+        puntos = (
+            (x1, y2 - radio),
+            (x1 + opuesto1, y2 - adyacente1),
+            (x1 + adyacente2, y2 + opuesto2),
+            (x1 - adyacente2, y2 + opuesto2),
+            (x1 - opuesto1, y2 - adyacente1)
+        )
+
+        self.lineaDDA(color, puntos[0][0], puntos[0][1], puntos[2][0], puntos[2][1])
+        self.lineaDDA(color, puntos[3][0], puntos[3][1], puntos[0][0], puntos[0][1])
+
+        self.lineaDDA(color, puntos[4][0], puntos[4][1], puntos[1][0], puntos[1][1])
+        self.lineaDDA(color, puntos[4][0], puntos[4][1], puntos[2][0], puntos[2][1])
+
+        self.lineaDDA(color, puntos[3][0], puntos[3][1], puntos[1][0], puntos[1][1])
 
     def octagono(self, color, centroX, centroY, radio):
 
@@ -119,5 +178,3 @@ class Figuras():
         # -y, -x
         # y, -x
         # x, -y
-
-

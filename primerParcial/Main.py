@@ -32,6 +32,10 @@ while inicio:
 
     dibujador.octagono(cl.ROJO, 600, 600, 100)
 
+    dibujador.hexagonoCirculo(cl.ROJO, 100, 400, 100)
+    
+    dibujador.estrellaCirculo(cl.ROJO, 100, 600, 100)
+
     # las coordenadas polares presentan un punto en el plano mediante:
     # 1.- r = distancia del origen(radio)
     # 2.- (simbolo angulo) = medido desde el eje x positivo
