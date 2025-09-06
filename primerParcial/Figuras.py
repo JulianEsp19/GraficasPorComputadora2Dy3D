@@ -1,5 +1,5 @@
 import math
-
+import threading
 
 class Figuras():
     def __init__(self,display):
@@ -8,7 +8,8 @@ class Figuras():
     def dibujarPixel(self, color, x, y):
         self.__display.set_at((x, y), color)
 
-
+    def obtenerPixel(self, x, y):
+        return self.__display.get_at((x,y))
     def linea(self, color, x1, y1, x2, y2):
         y1 = -y1
         y2 = -y2
@@ -169,12 +170,28 @@ class Figuras():
                 self.lineaDDA(color, puntos[i][0], puntos[i][1], puntos[i+1][0], puntos[i+1][1])
             else:
                 self.lineaDDA(color, puntos[i][0], puntos[i][1], puntos[0][0], puntos[0][1])
+    def scanLine(self,color, x, y):
+        threading.Thread(target=self.scanLine)
+        #obtener color del pixel interior para tener el color a reemplazar
+        colorFondo = self.obtenerPixel(x, y)
+        colorAux = colorFondo
 
-        # x, y
-        # y, x
-        # -y, x
-        # -x, y
-        # -x, -y
-        # -y, -x
-        # y, -x
-        # x, -y
+        while colorFondo != colorAux:
+            y -= 1
+            colorAux = self.obtenerPixel(x, y)
+        pass
+
+    def inundacion(self,color, x, y):
+
+        pass
+    def traslacion(self, ):
+        #|1 0 dx| |x|
+        #|0 1 dy| |y|
+        #|0 0 1 | |1|
+        pass
+
+    def escalar(self, ):
+        # |sx 0 0| |x|
+        # |0 sy 0| |y|
+        # |0 0  1| |1|
+        pass

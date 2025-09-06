@@ -11,6 +11,8 @@ pygame.display.set_caption("Lineas")
 
 dibujador = fg.Figuras(ventana)
 
+
+
 inicio = True
 
 while inicio:
