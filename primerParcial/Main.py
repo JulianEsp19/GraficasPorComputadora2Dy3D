@@ -11,8 +11,6 @@ pygame.display.set_caption("Lineas")
 
 dibujador = fg.Figuras(ventana)
 
-
-
 inicio = True
 
 while inicio:
@@ -22,21 +20,29 @@ while inicio:
 
     ventana.fill((255,255,255))
 
+    dibujador.linea(cl.AZUL, 10, 10, 100, 200)
+
     dibujador.cuadrado(cl.AZUL, 70, 70, 200,200)
+    dibujador.inundacion()
 
     dibujador.triangulo(cl.AZUL, 100, 100, 400, 400)
+    dibujador.scanLine()
 
     dibujador.dibujarPixel(cl.AZUL,20, 100)
 
     dibujador.hexagono(cl.ROJO, 150, 150, 400, 400)
+    dibujador.scanLine()
 
     dibujador.estrella(cl.ROJO, 200, 200, 600, 600)
 
     dibujador.octagono(cl.ROJO, 600, 600, 100)
+    dibujador.scanLine()
 
-    dibujador.hexagonoCirculo(cl.ROJO, 100, 400, 100)
-    
+    dibujador.pentagonoCirculo(cl.ROJO, 100, 400, 100)
+    dibujador.scanLine()
     dibujador.estrellaCirculo(cl.ROJO, 100, 600, 100)
+    dibujador.scanLine()
+    dibujador.inundacion()
 
     # las coordenadas polares presentan un punto en el plano mediante:
     # 1.- r = distancia del origen(radio)
