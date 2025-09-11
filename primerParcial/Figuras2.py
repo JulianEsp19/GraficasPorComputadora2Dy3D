@@ -13,6 +13,7 @@ class Figuras():
 
         self.__colorAux = ()
         self.__colorFondo = ()
+        sys.setrecursionlimit(10000)
 
     def dibujarPixel(self, color, x, y):
         self.__display.set_at((x, y), color)
@@ -333,7 +334,6 @@ class Figuras():
         self.__colorFondo = self.__obtenerPixel(puntoInicio)
         if self.__colorFondo == self.__colorAux:
             return
-        sys.setrecursionlimit(10000)
         self.__inundacionRecursivo(puntoInicio[0], puntoInicio[1])
 
     def __convertirColorRGBA(self):

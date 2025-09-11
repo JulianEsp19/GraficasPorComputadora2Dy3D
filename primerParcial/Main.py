@@ -1,6 +1,17 @@
+import threading
+from time import sleep
+
 import pygame
-import Figuras as fg
-import Colores as cl
+import Figuras2 as fg
+from primerParcial.Lienzo.Lienzo import Lienzo
+from primerParcial.Figuras.Pixel import Pixel
+from primerParcial.Figuras.Linea import Linea
+from primerParcial.Figuras.LineaDDA import LineaDDA
+from primerParcial.Figuras.Cuadrado import Cuadrado
+from primerParcial.Figuras.Triangulo import Triangulo
+from primerParcial.Figuras.Hexagono import Hexagono
+from primerParcial.Figuras.Circulo import Circulo
+from primerParcial.Colores import Colores as cl
 
 pygame.init()
 
@@ -11,6 +22,64 @@ pygame.display.set_caption("Lineas")
 
 dibujador = fg.Figuras(ventana)
 
+lienzo = Lienzo(ventana)
+
+pixel = Pixel()
+pixel.setCoordenadas(100, 100)
+
+linea = Linea()
+linea.setCoordenadas(100, 100, 200, 200)
+
+lineaDDA = LineaDDA()
+lineaDDA.setCoordenadas(120, 100, 220, 200)
+
+cuadrado = Cuadrado()
+cuadrado.setCoordenadas(150, 100, 250, 200)
+
+triangulo = Triangulo()
+triangulo.setCoordenadas(200, 300, 400, 500)
+
+hexagono = Hexagono()
+hexagono.setCoordenadas(400, 400, 500, 500)
+
+circulo = Circulo()
+circulo.setCoordenadas(175, 300, 100)
+
+# circulo2 = Circulo()
+# circulo2.setCoordenadas(325, 300, 100)
+#
+# circulo3 = Circulo()
+# circulo3.setCoordenadas(475, 300, 100)
+#
+# circulo4 = Circulo()
+# circulo4.setCoordenadas(625, 300, 100)
+
+def movimiento():
+    while True:
+        for i in range(100, 700):
+            circulo.setCoordenadas(i, 300, 100)
+            sleep(.01)
+
+        j = 700
+        for i in range(600):
+            j -= 1
+            circulo.setCoordenadas(j, 300, 100)
+            sleep(.01)
+
+lienzo.add(circulo)
+# lienzo.add(circulo2)
+# lienzo.add(circulo3)
+# lienzo.add(circulo4)
+
+threading.Thread(target=movimiento).start()
+
+lienzo.add(pixel)
+lienzo.add(linea)
+lienzo.add(lineaDDA)
+lienzo.add(cuadrado)
+lienzo.add(triangulo)
+lienzo.add(hexagono)
+
 inicio = True
 
 while inicio:
@@ -18,31 +87,8 @@ while inicio:
         if evento.type == pygame.QUIT:
             inicio = False
 
-    ventana.fill((255,255,255))
+    lienzo.update()
 
-    dibujador.linea(cl.AZUL, 10, 10, 100, 200)
-
-    dibujador.cuadrado(cl.AZUL, 70, 70, 200,200)
-    dibujador.inundacion()
-
-    dibujador.triangulo(cl.AZUL, 100, 100, 400, 400)
-    dibujador.scanLine()
-
-    dibujador.dibujarPixel(cl.AZUL,20, 100)
-
-    dibujador.hexagono(cl.ROJO, 150, 150, 400, 400)
-    dibujador.scanLine()
-
-    dibujador.estrella(cl.ROJO, 200, 200, 600, 600)
-
-    dibujador.octagono(cl.ROJO, 600, 600, 100)
-    dibujador.scanLine()
-
-    dibujador.pentagonoCirculo(cl.ROJO, 100, 400, 100)
-    dibujador.scanLine()
-    dibujador.estrellaCirculo(cl.ROJO, 100, 600, 100)
-    dibujador.scanLine()
-    dibujador.inundacion()
 
     # las coordenadas polares presentan un punto en el plano mediante:
     # 1.- r = distancia del origen(radio)
