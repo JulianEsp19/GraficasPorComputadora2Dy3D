@@ -6,6 +6,12 @@ from primerParcial.Figuras.LineaDDA import LineaDDA
 class Octagono(__BaseFigurasCirculo):
 
     def dibujar(self, display: SurfaceType):
+
+        if len(self._puntosScanline):
+            self._pintarPuntos(display)
+            self._rellenar(display)
+            return
+
         x1 = self._punto1[0]
         y1 = self._punto1[1]
 
@@ -36,9 +42,5 @@ class Octagono(__BaseFigurasCirculo):
             (7, 0)
         ]
 
-        linea = LineaDDA()
-        linea.setColor(self._color)
-
-        for i in self._unionesScanline:
-            linea.setCoordenadas(self._puntosScanline[i[0]], self._puntosScanline[i[1]])
-            linea.dibujar(display)
+        self._pintarPuntos(display)
+        self._rellenar(display)

@@ -1,11 +1,21 @@
 import math
 from pygame import SurfaceType
 from primerParcial.Figuras.__BaseFiguras import __BaseFigurasCirculo
+from primerParcial.Rellenos.Inundacion import Inundacion
 from primerParcial.Figuras.LineaDDA import LineaDDA
 
 class Estrella(__BaseFigurasCirculo):
 
     def dibujar(self, display: SurfaceType):
+
+        if len(self._puntosScanline):
+            self._pintarPuntos(display)
+            self._rellenar(display)
+            if self._relleno:
+                inundacion = Inundacion(self._punto1, display, self._color)
+                inundacion.rellenar()
+            return
+
         x1 = self._punto1[0]
         y1 = self._punto1[1]
 
@@ -33,9 +43,8 @@ class Estrella(__BaseFigurasCirculo):
             (3, 1)
         ]
 
-        linea = LineaDDA()
-        linea.setColor(self._color)
-
-        for i in self._unionesScanline:
-            linea.setCoordenadas(self._puntosScanline[i[0]], self._puntosScanline[i[1]])
-            linea.dibujar(display)
+        self._pintarPuntos(display)
+        self._rellenar(display)
+        if self._relleno:
+            inundacion = Inundacion(self._punto1, display, self._color)
+            inundacion.rellenar()
