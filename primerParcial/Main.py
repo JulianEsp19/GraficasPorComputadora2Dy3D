@@ -14,7 +14,7 @@ from primerParcial.Figuras.Circulo import Circulo
 from primerParcial.Figuras.Estrella import Estrella
 from primerParcial.Figuras.Pentagono import Pentagono
 from primerParcial.Figuras.Octagono import Octagono
-from primerParcial.Rellenos.Inundacion import Inundacion
+from primerParcial.Figuras.Ovalo import Ovalo
 from primerParcial.Colores import Colores as cl
 
 pygame.init()
@@ -91,6 +91,16 @@ triangulo2 = Triangulo()
 triangulo2.setRelleno(True)
 triangulo2.setCoordenadas(200, 300, 300, 400)  # con relleno
 
+ovalo = Ovalo()
+ovalo.setCoordenadas(600, 500, 50, 75)
+
+ovalo2 = Ovalo()
+ovalo2.setRelleno(True)
+ovalo2.setCoordenadas(720, 500, 50, 75)
+
+lienzo.add(ovalo)
+lienzo.add(ovalo2)
+
 
 # ➡️ Agregarlos al lienzo
 lienzo.add(circulo1)
@@ -119,6 +129,12 @@ lienzo.add(linea)
 lienzo.add(pixel)
 
 inicio = True
+
+def cambio():
+    while True:
+        sleep(.01)
+        cuadrado2.escalar(1.000000001)
+threading.Thread(target=cambio).start()
 
 while inicio:
     for evento in pygame.event.get():

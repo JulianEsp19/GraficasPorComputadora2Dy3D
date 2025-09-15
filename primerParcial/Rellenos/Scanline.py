@@ -4,8 +4,8 @@ from primerParcial.Figuras.LineaDDA import LineaDDA
 
 class Scanline():
     def __init__(self, puntos: list, uniones: list, color: tuple):
-        self.__unionesScanline = uniones
-        self.__puntosScanline = puntos
+        self.__unionesScanline = uniones[:]
+        self.__puntosScanline = puntos[:]
         self.__color = color
 
     def setPuntos(self, puntos: list):
