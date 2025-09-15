@@ -221,3 +221,109 @@ class __BaseFigurasCirculo():
         else:
             scanline = Scanline(self._puntosScanline, self._unionesScanline, self._color)
         scanline.rellenar(display)
+
+    def __multiplicarMatriz(self, matriz1, matriz2):
+        matrizResultante = []
+
+        for i in matriz1:
+            resultado = 0
+            for j in range(len(i)):
+                resultado += i[j] * matriz2[j][0]
+            matrizResultante.append([resultado])
+
+        return matrizResultante
+
+    def __calcularCentro(self):
+        x, y = 0, 0
+        for i in self._puntosScanline:
+            x += i[0]
+            y += i[1]
+
+        return (int(x/ len(self._puntosScanline)), int(y / len(self._puntosScanline)))
+
+
+    def traslacion(self, movimientoX, movimientoY):
+        # |1 0 dx| |x|
+        # |0 1 dy| |y|
+        # |0 0 1 | |1|
+
+        matriz1 = [
+            [1, 0, movimientoX],
+            [0, 1, -movimientoY],
+            [0, 0, 1]
+        ]
+
+        nuevosPuntos = []
+
+        for i in self._puntosScanline:
+            matriz2 =[
+                [i[0]],
+                [-i[1]],
+                [1]
+            ]
+
+            resultado = self.__multiplicarMatriz(matriz1, matriz2)
+            print(resultado[1][0])
+            nuevosPuntos.append((resultado[0][0], -resultado[1][0]))
+
+
+        self._puntosScanline = nuevosPuntos
+
+    def rotacion(self, grados):
+        matriz1 = [
+            [math.cos(math.radians(grados)), -math.sin(math.radians(grados))],
+            [math.sin(math.radians(grados)), math.cos(math.radians(grados))],
+        ]
+
+        centro = self.__calcularCentro()
+
+        nuevosPuntos = []
+
+        for i in self._puntosScanline:
+            matriz2 = [
+                [i[0]],
+                [-i[1]],
+                [1]
+            ]
+
+            resultado = self.__multiplicarMatriz(matriz1, matriz2)
+            print(resultado[1][0])
+            nuevosPuntos.append((round(resultado[0][0]), -round(resultado[1][0])))
+
+        self._puntosScanline = nuevosPuntos
+
+        nuevoCentro = self.__calcularCentro()
+
+        self.traslacion(-(nuevoCentro[0] - centro[0]), -(nuevoCentro[1] - (centro[1])))
+
+    def escalar(self, valorEscala):
+        # |sx 0 0| |x|
+        # |0 sy 0| |y|
+        # |0 0  1| |1|
+
+        matriz1 = [
+            [valorEscala, 0, 0],
+            [0, valorEscala, 0],
+            [0, 0, 1]
+        ]
+
+        centro = self.__calcularCentro()
+
+        nuevosPuntos = []
+
+        for i in self._puntosScanline:
+            matriz2 = [
+                [i[0]],
+                [-i[1]],
+                [1]
+            ]
+
+            resultado = self.__multiplicarMatriz(matriz1, matriz2)
+            print(resultado[1][0])
+            nuevosPuntos.append((round(resultado[0][0]), -round(resultado[1][0])))
+
+        self._puntosScanline = nuevosPuntos
+
+        nuevoCentro = self.__calcularCentro()
+
+        self.traslacion(-(nuevoCentro[0] - centro[0]), -(nuevoCentro[1] - (centro[1])))
