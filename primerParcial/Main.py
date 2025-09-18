@@ -130,10 +130,12 @@ lienzo.add(pixel)
 
 inicio = True
 
+cuadrado2.setColor((255,255,255,255))
+cuadrado2.setRelleno(True, (255,255,255,0))
 def cambio():
     while True:
-        sleep(.01)
-        cuadrado2.escalar(1.000000001)
+        sleep(.5)
+        cuadrado2.escalar(1.1)
 threading.Thread(target=cambio).start()
 
 while inicio:

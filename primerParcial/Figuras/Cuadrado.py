@@ -11,6 +11,12 @@ class Cuadrado(__BaseFiguras):
             self._rellenar(display)
             return
 
+        self.calcularPuntos()
+
+        self._pintarPuntos(display)
+        self._rellenar(display)
+
+    def calcularPuntos(self):
         x1 = self._punto1[0]
         y1 = self._punto1[1]
 
@@ -30,6 +36,3 @@ class Cuadrado(__BaseFiguras):
             (1, 3),
             (2, 3)
         ]
-
-        self._pintarPuntos(display)
-        self._rellenar(display)

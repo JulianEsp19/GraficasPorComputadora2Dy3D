@@ -32,6 +32,12 @@ class Ovalo(__BaseFigurasCirculo):
             self._rellenar(display)
             return
 
+        self.calcularPuntos()
+
+        self._pintarPuntos(display)
+        self._rellenar(display)
+
+    def calcularPuntos(self):
         x1 = self._punto1[0]
         y1 = self._punto1[1]
 
@@ -42,12 +48,9 @@ class Ovalo(__BaseFigurasCirculo):
             x = round(x1 + self._radio * math.cos(angulo))
             y = round(y1 + self._radio2 * math.sin(angulo))
             self._puntosScanline.append((x, y))
-            self._unionesScanline.append((i, i+1))
+            self._unionesScanline.append((i, i + 1))
         self._unionesScanline.pop(-1)
-        self._unionesScanline.append((self.__resolucion-1, 0))
-
-        self._pintarPuntos(display)
-        self._rellenar(display)
+        self._unionesScanline.append((self.__resolucion - 1, 0))
 
     def setResolucion(self, resolucion):
         self.__resolucion = resolucion
