@@ -8,8 +8,8 @@ class Hexagono(__BaseFiguras):
     def dibujar(self, display: SurfaceType):
 
         if len(self._puntosScanline):
-            self._pintarPuntos(display)
             self._rellenar(display)
+            self._pintarPuntos(display)
             return
 
         x1 = self._punto1[0]
@@ -47,5 +47,5 @@ class Hexagono(__BaseFiguras):
             (5, 1)
         ]
 
-        self._pintarPuntos(display)
         self._rellenar(display)
+        self._pintarPuntos(display)

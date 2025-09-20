@@ -8,8 +8,8 @@ class Pentagono(__BaseFigurasCirculo):
     def dibujar(self, display: SurfaceType):
 
         if len(self._puntosScanline):
-            self._pintarPuntos(display)
             self._rellenar(display)
+            self._pintarPuntos(display)
             return
 
         x1 = self._punto1[0]
@@ -39,5 +39,5 @@ class Pentagono(__BaseFigurasCirculo):
             (4, 0)
         ]
 
-        self._pintarPuntos(display)
         self._rellenar(display)
+        self._pintarPuntos(display)

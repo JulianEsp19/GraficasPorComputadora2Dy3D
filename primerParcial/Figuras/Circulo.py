@@ -12,8 +12,8 @@ class Circulo(__BaseFigurasCirculo):
 
     def dibujar(self, display: SurfaceType):
         if len(self._puntosScanline):
-            self._pintarPuntos(display)
             self._rellenar(display)
+            self._pintarPuntos(display)
             return
 
         x1 = self._punto1[0]
@@ -30,8 +30,8 @@ class Circulo(__BaseFigurasCirculo):
         self._unionesScanline.pop(-1)
         self._unionesScanline.append((self.__resolucion-1, 0))
 
-        self._pintarPuntos(display)
         self._rellenar(display)
+        self._pintarPuntos(display)
 
     def setResolucion(self, resolucion):
         self.__resolucion = resolucion

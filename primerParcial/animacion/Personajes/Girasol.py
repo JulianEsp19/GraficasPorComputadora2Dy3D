@@ -12,7 +12,6 @@ class Girasol():
     def __init__(self, x, y):
         self.__x = x
         self.__y = y
-        self.__objetos = []
         self.__petalos = []
         self.__tiempoAux = time.time()
         self.__tiempo = 0.0

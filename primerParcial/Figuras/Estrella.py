@@ -9,8 +9,8 @@ class Estrella(__BaseFigurasCirculo):
     def dibujar(self, display: SurfaceType):
 
         if len(self._puntosScanline):
-            self._pintarPuntos(display)
             self._rellenar(display)
+            self._pintarPuntos(display)
             if self._relleno:
                 inundacion = Inundacion(self._punto1, display, self._color)
                 inundacion.rellenar()
@@ -43,8 +43,8 @@ class Estrella(__BaseFigurasCirculo):
             (3, 1)
         ]
 
-        self._pintarPuntos(display)
         self._rellenar(display)
+        self._pintarPuntos(display)
         if self._relleno:
             inundacion = Inundacion(self._punto1, display, self._color)
             inundacion.rellenar()

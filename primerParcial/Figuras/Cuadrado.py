@@ -7,14 +7,14 @@ class Cuadrado(__BaseFiguras):
     def dibujar(self, display: SurfaceType):
 
         if len(self._puntosScanline):
-            self._pintarPuntos(display)
             self._rellenar(display)
+            self._pintarPuntos(display)
             return
 
         self.calcularPuntos()
 
-        self._pintarPuntos(display)
         self._rellenar(display)
+        self._pintarPuntos(display)
 
     def calcularPuntos(self):
         x1 = self._punto1[0]
