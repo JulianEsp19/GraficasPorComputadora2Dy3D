@@ -1,3 +1,6 @@
+import os
+
+import pygame
 from pygame import SurfaceType
 from primerParcial.Colores import Colores as cl
 
@@ -6,6 +9,10 @@ class Lienzo():
         self.__display = display
         self.__objetos = []
         self.__color = cl.BLANCO
+        print(os.getcwd())
+        self.__imagen = pygame.image.load('primerParcial/Lienzo/Patio_delantero_de_dia.webp')
+        self.__imagen = pygame.transform.scale(self.__imagen, (1100, 700))
+        self.__imagen.convert_alpha()
 
     def add(self, objeto):
         self.__objetos.append(objeto)
@@ -13,8 +20,15 @@ class Lienzo():
     def setColor(self, color):
         self.__color = color
 
+    def delete(self, objeto):
+        self.__objetos.remove(objeto)
+
+    def isExist(self, objeto):
+        return self.__objetos.__contains__(objeto)
+
     def update(self):
         self.__display.fill(self.__color)
+        self.__display.blit(self.__imagen, (0, 100))
 
         for objeto in self.__objetos:
             objeto.dibujar(self.__display)

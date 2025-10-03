@@ -6,16 +6,14 @@ from primerParcial.Figuras.LineaDDA import LineaDDA
 
 class Estrella(__BaseFigurasCirculo):
 
-    def dibujar(self, display: SurfaceType):
+    def __init__(self):
+        super().__init__()
+        self.__centro = False
 
-        if len(self._puntosScanline):
-            self._rellenar(display)
-            self._pintarPuntos(display)
-            if self._relleno:
-                inundacion = Inundacion(self._punto1, display, self._color)
-                inundacion.rellenar()
-            return
+    def isCentro(self, centro):
+        self.__centro = centro
 
+    def calcularPuntos(self):
         x1 = self._punto1[0]
         y1 = self._punto1[1]
 
@@ -43,8 +41,20 @@ class Estrella(__BaseFigurasCirculo):
             (3, 1)
         ]
 
+    def dibujar(self, display: SurfaceType):
+
+        if len(self._puntosScanline):
+            self._rellenar(display)
+            self._pintarPuntos(display)
+            if self._relleno and self.__centro:
+                inundacion = Inundacion(self._punto1, display, self._color)
+                inundacion.rellenar()
+            return
+
+        self.calcularPuntos()
+
         self._rellenar(display)
         self._pintarPuntos(display)
-        if self._relleno:
+        if self._relleno and self.__centro:
             inundacion = Inundacion(self._punto1, display, self._color)
             inundacion.rellenar()

@@ -16,6 +16,12 @@ class Circulo(__BaseFigurasCirculo):
             self._pintarPuntos(display)
             return
 
+        self.calcularPuntos()
+
+        self._rellenar(display)
+        self._pintarPuntos(display)
+
+    def calcularPuntos(self):
         x1 = self._punto1[0]
         y1 = self._punto1[1]
 
@@ -26,12 +32,9 @@ class Circulo(__BaseFigurasCirculo):
             x = round(x1 + self._radio * math.cos(angulo))
             y = round(y1 + self._radio * math.sin(angulo))
             self._puntosScanline.append((x, y))
-            self._unionesScanline.append((i, i+1))
+            self._unionesScanline.append((i, i + 1))
         self._unionesScanline.pop(-1)
-        self._unionesScanline.append((self.__resolucion-1, 0))
-
-        self._rellenar(display)
-        self._pintarPuntos(display)
+        self._unionesScanline.append((self.__resolucion - 1, 0))
 
     def setResolucion(self, resolucion):
         self.__resolucion = resolucion
