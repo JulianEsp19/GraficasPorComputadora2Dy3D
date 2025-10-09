@@ -283,7 +283,7 @@ class __BaseFigurasCirculo():
             ]
 
             resultado = self.__multiplicarMatriz(matriz1, matriz2)
-            nuevosPuntos.append((round(resultado[0][0]), -round(resultado[1][0])))
+            nuevosPuntos.append((resultado[0][0], -resultado[1][0]))
 
         self._puntosScanline = nuevosPuntos
 
@@ -314,7 +314,7 @@ class __BaseFigurasCirculo():
             ]
 
             resultado = self.__multiplicarMatriz(matriz1, matriz2)
-            nuevosPuntos.append((round(resultado[0][0]), -round(resultado[1][0])))
+            nuevosPuntos.append((resultado[0][0], -resultado[1][0]))
 
         self._puntosScanline = nuevosPuntos
 

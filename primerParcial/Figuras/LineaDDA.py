@@ -24,11 +24,11 @@ class LineaDDA():
 
     def dibujar(self, display: SurfaceType):
 
-        x1 = self._punto1[0]
-        y1 = -self._punto1[1]
+        x1 = round(self._punto1[0])
+        y1 = -round(self._punto1[1])
 
-        x2 = self._punto2[0]
-        y2 = -self._punto2[1]
+        x2 = round(self._punto2[0])
+        y2 = -round(self._punto2[1])
 
         pixel = Pixel()
         pixel.setColor(self._color)

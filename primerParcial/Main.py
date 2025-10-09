@@ -130,12 +130,34 @@ lienzo.add(pixel)
 
 inicio = True
 
-cuadrado2.setColor((255,255,255,255))
-cuadrado2.setRelleno(True, (255,255,255,0))
 def cambio():
+    variableAux = 0
+    variableAux2 = 0
     while True:
-        sleep(.5)
-        cuadrado2.escalar(1.1)
+        sleep(1)
+        cuadrado2.rotacion(10)
+
+        if variableAux2 < 1:
+            triangulo1.escalar(2)
+            variableAux2 += 1
+        elif variableAux2 < 4:
+            variableAux2 += 1
+        elif variableAux2 < 5:
+            triangulo1.escalar(.5)
+            variableAux2 += 1
+        elif variableAux2 < 9:
+            variableAux2 += 1
+        elif variableAux2 < 10:
+            variableAux2 = 0
+
+        if variableAux < 10:
+            ovalo.traslacion(0, 10)
+            variableAux += 1
+        elif variableAux < 20:
+            ovalo.traslacion(0, -10)
+        elif variableAux < 21:
+            variableAux = 0
+
 threading.Thread(target=cambio).start()
 
 while inicio:
