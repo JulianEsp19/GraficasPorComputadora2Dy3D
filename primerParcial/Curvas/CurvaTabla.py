@@ -2,7 +2,7 @@ import math
 from pygame import SurfaceType
 
 from primerParcial.Figuras.__BaseFiguras import __BaseFigurasCirculo
-class Curva1(__BaseFigurasCirculo):
+class CurvaTabla(__BaseFigurasCirculo):
 
     def __init__(self, resolucion):
         super().__init__()
@@ -19,14 +19,15 @@ class Curva1(__BaseFigurasCirculo):
         self._pintarPuntos(display)
 
     def calcularPuntos(self):
-        pasos = math.pi / self.__resolucion
+        pasos = 10 / self.__resolucion
 
-        for i in range(0,self.__resolucion+1):
-            x = pasos * i
-            y = -math.sin(x)
+        for i in range(0, 10):
+            t = pasos * i
+            x = t - 3 * math.sin(t)
+            y = -(4 - 3 * math.sin(t))
             self._puntosScanline.append((x, y))
             self._unionesScanline.append((i, i+1))
 
         self._unionesScanline.pop(-1)
 
-        self.escalar(100)
+        self.escalar(20)
