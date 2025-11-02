@@ -1,14 +1,11 @@
-import threading
-from time import sleep
-
 import pygame
 
-from primerParcial.Curvas.Curva1 import Curva1
-from primerParcial.Curvas.CurvaTabla import CurvaTabla
-from primerParcial.Curvas.Flor import Flor
-from primerParcial.Curvas.Humito import Humito
-from primerParcial.Curvas.Infinito import Infinito
-from primerParcial.Curvas.Sol import Sol
+from SegundoParcial.Curvas.Curva1 import Curva1
+from SegundoParcial.Curvas.CurvaTabla import CurvaTabla
+from SegundoParcial.Curvas.Flor import Flor
+from SegundoParcial.Curvas.Humito import Humito
+from SegundoParcial.Curvas.Infinito import Infinito
+from SegundoParcial.Curvas.Sol import Sol
 from primerParcial.Lienzo.Lienzo import Lienzo
 
 pygame.init()

@@ -30,6 +30,9 @@ class LineaDDA():
         x2 = round(self._punto2[0])
         y2 = -round(self._punto2[1])
 
+        if x1 == x2 and y1 == y2:
+            return
+
         pixel = Pixel()
         pixel.setColor(self._color)
 
@@ -38,6 +41,7 @@ class LineaDDA():
 
         pasos = abs(deltaX) if abs(deltaX) > abs(deltaY) else abs(deltaY)
 
+        print(self._punto1, self._punto2)
         incrementox = deltaX / pasos
         incrementoy = deltaY / pasos
 
