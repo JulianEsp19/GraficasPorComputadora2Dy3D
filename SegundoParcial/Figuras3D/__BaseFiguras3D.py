@@ -12,7 +12,7 @@ class __BaseFiguras3D:
     def __init__(self):
         self._color = (0, 0, 0, 255)
         self._punto1 = ()
-        self._camara = (0, 0, -70)
+        self._camara = (400, 0, -500)
         self._puntos3D = []
         self._uniones3D = []
         self._puntosScanline = []
@@ -163,8 +163,8 @@ class __BaseFiguras3D:
 
         self._puntos3D = nuevosPuntos
 
-        if self.pintando:
-            return
+        while self.pintando:
+            continue
         self._puntosScanline = []
 
     def rotacion(self, eje, grados):
@@ -222,9 +222,9 @@ class __BaseFiguras3D:
         # |0 0  1| |1|
 
         matriz1 = [
-            [valorEscala, 0, 0],
-            [0, valorEscala, 0],
-            [0, 0, 0, valorEscala],
+            [valorEscala, 0, 0, 0],
+            [0, valorEscala, 0, 0],
+            [0, 0, valorEscala, 0],
             [0, 0, 0, 1]
         ]
 

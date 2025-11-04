@@ -40,4 +40,6 @@ class Cubo(__BaseFiguras3D):
             (6, 7)
         )
 
+        print(self._puntos3D)
+
         self._proyectar()

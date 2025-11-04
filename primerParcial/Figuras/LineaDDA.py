@@ -41,7 +41,6 @@ class LineaDDA():
 
         pasos = abs(deltaX) if abs(deltaX) > abs(deltaY) else abs(deltaY)
 
-        print(self._punto1, self._punto2)
         incrementox = deltaX / pasos
         incrementoy = deltaY / pasos
 

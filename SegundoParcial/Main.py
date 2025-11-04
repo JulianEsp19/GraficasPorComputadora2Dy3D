@@ -21,37 +21,37 @@ curva1 = Curva1(8)
 curva1.calcularPuntos()
 curva1.traslacion(200, 100)
 lienzo.add(curva1)
+#
+# curva2 = Curva1(100)
+# curva2.calcularPuntos()
+# curva2.traslacion(200, 150)
+# lienzo.add(curva2)
+#
+# curva3 = Humito(100)
+# curva3.calcularPuntos()
+# curva3.traslacion(400, 100)
+# lienzo.add(curva3)
 
-curva2 = Curva1(100)
-curva2.calcularPuntos()
-curva2.traslacion(200, 150)
-lienzo.add(curva2)
+#
+# curvaTabla = CurvaTabla(10)
+# curvaTabla.calcularPuntos()
+# curvaTabla.traslacion(150, 300)
+# lienzo.add(curvaTabla)
 
-curva3 = Humito(100)
-curva3.calcularPuntos()
-curva3.traslacion(400, 100)
-lienzo.add(curva3)
+# infinito = Infinito(50, 150)
+# infinito.calcularPuntos()
+# infinito.traslacion(160, 400)
+# lienzo.add(infinito)
 
+# flor = Flor(200)
+# flor.calcularPuntos()
+# flor.traslacion(180, 620)
+# lienzo.add(flor)
 
-curvaTabla = CurvaTabla(10)
-curvaTabla.calcularPuntos()
-curvaTabla.traslacion(150, 300)
-lienzo.add(curvaTabla)
-
-infinito = Infinito(50, 150)
-infinito.calcularPuntos()
-infinito.traslacion(160, 400)
-lienzo.add(infinito)
-
-flor = Flor(200)
-flor.calcularPuntos()
-flor.traslacion(180, 620)
-lienzo.add(flor)
-
-sol = Sol(100)
-sol.calcularPuntos()
-sol.traslacion(550, 350)
-lienzo.add(sol)
+# sol = Sol(100)
+# sol.calcularPuntos()
+# sol.traslacion(550, 350)
+# lienzo.add(sol)
 
 inicio = True
 

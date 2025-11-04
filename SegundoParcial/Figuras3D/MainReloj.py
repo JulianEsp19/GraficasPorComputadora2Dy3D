@@ -4,7 +4,7 @@ from time import sleep
 import pygame
 
 from SegundoParcial.Figuras3D import Ejes
-from SegundoParcial.Figuras3D.Cubo import Cubo
+from SegundoParcial.Figuras3D.RelojArena import RelojArena
 from primerParcial.Lienzo.Lienzo import Lienzo
 
 pygame.init()
@@ -16,10 +16,9 @@ pygame.display.set_caption("Lineas")
 
 lienzo = Lienzo(ventana)
 
-cubo = Cubo(400, 100, 10, 100)
-cubo.setPosicionCamara(400, 0, 500)
-cubo.traslacion(0, 100, 0)
-lienzo.add(cubo)
+reloj = RelojArena(300, 500, 50, 30, 10, 25)
+
+lienzo.add(reloj)
 
 inicio = True
 
@@ -27,37 +26,38 @@ def moverCubo():
     esperar = 0.01
     while True:
         for i in range(200):
-            cubo.traslacion(1, 0, 0)
+            reloj.traslacion(1, 0, 0)
             sleep(esperar)
             if i < 180:
-                cubo.rotacion(Ejes.Z, 1)
+                reloj.rotacion(Ejes.Z, 1)
             if not i:
-                cubo.escalar(2)
-        cubo.setColor((100, 0, 100))
+                reloj.escalar(2)
+        reloj.setColor((100, 0, 100))
         for i in range(180):
             sleep(esperar)
-            cubo.rotacion(Ejes.Y, 1)
-        cubo.setColor((0, 0, 150))
+            reloj.rotacion(Ejes.Y, 1)
+        reloj.setColor((0, 0, 150))
         for i in range(400):
             sleep(esperar)
-            cubo.traslacion(-1, 0, 0)
+            reloj.traslacion(-1, 0, 0)
             if i < 360:
-                cubo.rotacion(Ejes.Z, 1)
+                reloj.rotacion(Ejes.Z, 1)
             if not i:
-                cubo.escalar(.5)
+                reloj.escalar(.5)
         for i in range(180):
-            cubo.rotacion(Ejes.X, 1)
+            reloj.rotacion(Ejes.X, 1)
             sleep(esperar)
-        cubo.setColor((0, 140, 100))
+        reloj.setColor((0, 140, 100))
         for i in range(200):
             sleep(esperar)
-            cubo.traslacion(1, 0, 0)
+            reloj.traslacion(1, 0, 0)
             if i < 180:
-                cubo.rotacion(Ejes.Z, 1)
+                reloj.rotacion(Ejes.Z, 1)
 
         sleep(esperar)
 
 threading.Thread(target=moverCubo).start()
+
 while inicio:
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
