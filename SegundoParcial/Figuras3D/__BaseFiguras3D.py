@@ -52,6 +52,11 @@ class __BaseFiguras3D:
         self._camara = (x, -y, -z)
         self._puntosScanline = []
 
+    def trasladarCamara(self, x, y, z):
+
+        self._camara = (self._camara[0]+x, self._camara[1]-y,self._camara[2]-z,)
+        self._puntosScanline = []
+
     def moverCamara(self, x, y, z):
         pass
 
