@@ -1,4 +1,5 @@
 import math
+from abc import abstractmethod
 
 from multipledispatch import dispatch
 from primerParcial.Figuras.LineaDDA import LineaDDA
@@ -17,12 +18,21 @@ class __BaseFiguras():
         self._relleno = False
         self._colorRelleno = ()
 
+    @abstractmethod
+    def calcularPuntos(self):
+        pass
+
+    @abstractmethod
+    def dibujar(self):
+        pass
+
     @dispatch(int, int, int, int)
     def setCoordenadas(self, x1, y1, x2, y2):
         self._punto1 = (x1, y1)
         self._punto2 = (x2, y2)
         self._puntosScanline = []
         self._unionesScanline = []
+
 
     @dispatch(tuple, tuple)
     def setCoordenadas(self, punto1, punto2):
