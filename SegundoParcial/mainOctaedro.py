@@ -12,7 +12,7 @@ from primerParcial.Lienzo.Lienzo import Lienzo
 
 pygame.init()
 
-alto, ancho = 800, 800
+alto, ancho = 1000, 1000
 
 ventana = pygame.display.set_mode((ancho, alto))
 pygame.display.set_caption("Lineas")
@@ -20,83 +20,123 @@ pygame.display.set_caption("Lineas")
 lienzo = Lienzo(ventana)
 lienzo.setColor((0,0,0))
 
-octaedro = Octaedro(200, 200, 100, 200)
-octaedro.setColor((0,0,0))
-lienzo.add(octaedro)
+def blend(color_a, color_b, t):
+    return (
+        int(color_a[0] * (1 - t) + color_b[0] * t),
+        int(color_a[1] * (1 - t) + color_b[1] * t),
+        int(color_a[2] * (1 - t) + color_b[2] * t),
+    )
 
-inicio = True
+# --- Colores secundarios (figura interna) ---
+color_sec_por_tipo = {
+    1: (200, 30, 30),    # caja regalo (rojo)
+    3: (255, 215, 0),    # estrella (dorado)
+    4: (150, 30, 200),   # caja regalo 2 (morado)
+    5: (220, 240, 255),  # copo de nieve (azulado)
+    6: (230, 60, 140),   # dulce (rosa)
+}
 
+# --- Paleta de colores pastel para las figuras externas (octaedros) ---
+paleta_cycle = [
+    (255, 179, 186),  # rosa pastel
+    (255, 223, 186),  # durazno claro
+    (255, 255, 186),  # amarillo claro
+    (186, 255, 201),  # verde menta
+    (186, 225, 255),  # celeste claro
+    (218, 186, 255),  # lavanda
+]
+
+# --- Crear varios octaedros ---
+octaedros = []
+
+rows = 3
+cols = 3
+width, height = 800, 800
+margin = 60
+size = 160
+
+usable_w = width - 2 * margin
+usable_h = height - 2 * margin
+spacing_x = usable_w / (cols - 1) if cols > 1 else 0
+spacing_y = usable_h / (rows - 1) if rows > 1 else 0
+
+# Ciclo de tipos (sin el árbol navideño, tipo 2)
+tipo_seq = [1, 3, 4, 5, 6]
+k = 0
+
+for r in range(rows):
+    for c in range(cols):
+        px = int(margin + c * spacing_x)
+        py = int(margin + r * spacing_y)
+        pz = 100
+
+        tipo = tipo_seq[k % len(tipo_seq)]
+        k += 1
+
+        # Crear el octaedro
+        octa = Octaedro(px, py, pz, size, tipo)
+
+        # Color secundario según tipo (figura interna)
+        sec_color = color_sec_por_tipo.get(tipo, (255, 255, 0))
+        octa.setColorSecundario(sec_color)
+
+        # Color principal inicial (pastel)
+        octa.setColor(paleta_cycle[0])
+
+        # Rotación inicial en X para apreciarse mejor
+        octa.rotacion(Ejes.X, 70)
+
+        lienzo.add(octa)
+
+        # Cada uno tiene una fase distinta en la animación
+        fase = (r * cols + c) * (2 * math.pi / (rows * cols))
+        octaedros.append({"obj": octa, "fase": fase, "tipo": tipo})
+
+# --- Animación: rotación suave y cambio de color principal pastel ---
 def moverCubo():
-    # Ajustes
-    esperar = 0.01  # tiempo de sleep por paso (ajusta la suavidad/velocidad)
-    steps_half = 90  # número de pasos para la mitad del ciclo (fade-out o fade-in)
-    # Duración total de una transición = 2 * steps_half * esperar
-
-    # Colores base (RGB)
-    colores = [
-        (255, 0, 0),  # rojo
-        (0, 255, 0),  # verde
-        (255, 220, 100),  # dorado
-        (255, 255, 255)  # blanco
-    ]
-
-    def mezcla(color_a, color_b, a_factor, b_factor):
-        """Devuelve la mezcla ponderada (enteros 0-255)."""
-        r = int(color_a[0] * a_factor + color_b[0] * b_factor)
-        g = int(color_a[1] * a_factor + color_b[1] * b_factor)
-        b = int(color_a[2] * a_factor + color_b[2] * b_factor)
-        return (r, g, b)
+    fps_sleep = 1 / 60.0
+    rotation_speed = 0.6
+    color_speed = 0.8
+    t = 0.0
+    n_pal = len(paleta_cycle)
 
     while True:
-        for i in range(len(colores)):
-            actual = colores[i]
-            siguiente = colores[(i + 1) % len(colores)]
+        t += color_speed * fps_sleep
 
-            # Primera mitad: FADE OUT del color actual (1 -> 0)
-            for paso in range(steps_half):
-                # factor de 1.0 a 0.0
-                f_actual = 1.0 - (paso / (steps_half - 1))
-                f_siguiente = 0.0
-                color = mezcla(actual, siguiente, f_actual, f_siguiente)
+        for info in octaedros:
+            octa = info["obj"]
+            fase = info["fase"]
 
-                # respiración: pequeño movimiento vertical y giro ligero usando seno para fluidez
-                fase = (paso / steps_half) * math.pi  # 0..pi
-                desplaz_x = math.sin(fase) * 0.12  # movimiento leve lateral
-                octaedro.setRelleno(True, color)
-                octaedro.rotacion(Ejes.Y, 1)
-                octaedro.rotacion(Ejes.Z, 0.6)
-                octaedro.traslacion(desplaz_x, 5, 5)
-                sleep(esperar)
+            # rotación suave en Y
+            octa.rotacion(Ejes.Y, rotation_speed)
 
-            # Segunda mitad: FADE IN del color siguiente (0 -> 1)
-            for paso in range(steps_half):
-                # factor de 0.0 a 1.0
-                f_actual = 0.0
-                f_siguiente = (paso / (steps_half - 1))
-                color = mezcla(actual, siguiente, f_actual, f_siguiente)
+            # interpolación circular entre colores pastel
+            u = (t + fase) % (2 * math.pi)
+            pos = (u / (2 * math.pi)) * n_pal
+            idx = int(math.floor(pos)) % n_pal
+            next_idx = (idx + 1) % n_pal
+            frac = pos - math.floor(pos)
 
-                # misma "respiración" suave pero invertida en fase para continuidad
-                fase = (paso / steps_half) * math.pi  # 0..pi
-                desplaz_x = math.sin(fase) * 0.12
-                octaedro.setRelleno(True, color)
-                octaedro.rotacion(Ejes.Y, 1)
-                octaedro.rotacion(Ejes.Z, 0.6)
-                octaedro.traslacion(desplaz_x, -5, -5)
-                sleep(esperar)
+            color_a = paleta_cycle[idx]
+            color_b = paleta_cycle[next_idx]
+            color_main = blend(color_a, color_b, frac)
 
-            # pequeño remate entre transiciones (opcional, suave)
-            for k in range(8):
-                octaedro.rotacion(Ejes.Y, 1)
-                sleep(esperar)
+            # actualizar color principal
+            octa.setColor(color_main)
 
+        sleep(fps_sleep)
 
+# Hilo de animación
+threading.Thread(target=moverCubo, daemon=True).start()
 
-threading.Thread(target=moverCubo).start()
-
+# --- Bucle principal ---
+inicio = True
 while inicio:
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
             inicio = False
+
     lienzo.update()
     pygame.display.update()
+
 pygame.quit()
