@@ -92,7 +92,7 @@ class Scanline():
 
             valoresXAux.sort()
 
-            for i in range(0, len(valoresXAux), 2):
+            for i in range(0, len(valoresXAux)-1, 1):
                 if valoresXAux[i] == valoresXAux[i + 1]:
                     continue
                 punto1 = (valoresXAux[i], scanline)

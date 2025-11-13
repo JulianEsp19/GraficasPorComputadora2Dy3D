@@ -3,6 +3,8 @@ import os
 import pygame
 from pygame import SurfaceType
 from primerParcial.Colores import Colores as cl
+from primerParcial.Rellenos.Inundacion import Inundacion
+
 
 class Lienzo():
     def __init__(self, display: SurfaceType):
@@ -27,6 +29,6 @@ class Lienzo():
 
     def update(self):
         self.__display.fill(self.__color)
-
+        inundacion = Inundacion((1,1), self.__display, (0,0,0))
         for objeto in self.__objetos:
             objeto.dibujar(self.__display)
