@@ -242,10 +242,6 @@ def moverNieve():
 
             # Si el copo llegó al fondo, reaparece arriba inmediatamente
             if y < -1200:  # borde inferior de la ventana
-
-                nuevo_x = random.randint(-800, 0)
-                nuevo_z = random.randint(-200, 200)  # profundidad aleatoria
-
                 # Reiniciar posición base
                 cubo.traslacion(0, -1200, 0)
 

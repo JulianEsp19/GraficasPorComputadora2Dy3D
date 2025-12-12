@@ -11,6 +11,7 @@ class Octaedro(__BaseFiguras3D):
         self._lado = lado
         self._punto1 = (x, -y, z)
         self._figuraInterna = figuraInterna
+        self._caras = []  # Aquí guardaremos la definición de caras
         self.calcularPuntos()
         self._colorSecundario = 0
 
@@ -44,13 +45,52 @@ class Octaedro(__BaseFiguras3D):
             return
         contador = 0
         for i in self._unionesScanline:
-            linea.setCoordenadas(self._puntosScanline[i[0]], self._puntosScanline[i[1]])
-            linea.dibujar(display)
-            contador += 1
+
             if contador > 11:
                 linea.setColor(self._colorSecundario)
+                linea.setCoordenadas(self._puntosScanline[i[0]], self._puntosScanline[i[1]])
+                linea.dibujar(display)
+            contador += 1
 
         self.pintando = False
+
+    def dibujar(self, display: SurfaceType):
+        # Si no hay relleno, usamos el método viejo de líneas
+
+        self.pintando = True
+        if not self._relleno:
+            super().dibujar(display)
+            return
+
+        # Definir las caras si es la primera vez o si cambian los puntos
+        # Basado en tu lógica de 'figura6' (Octaedro):
+        # Indices 0,1,2,3 son el cuadrado central. 4 es punta arriba, 5 punta abajo.
+        # Las uniones originales eran: (0,1), (0,2), (2,3), (1,3)...
+        # Esto sugiere un orden de vértices del cuadrado base: 0 -> 1 -> 3 -> 2 (revisando tus uniones)
+
+        # Caras Superiores (conectan con 4)
+        c1 = (0, 1, 4)
+        c2 = (1, 3, 4)
+        c3 = (3, 2, 4)
+        c4 = (2, 0, 4)
+
+        # Caras Inferiores (conectan con 5)
+        c5 = (1, 0, 5)
+        c6 = (3, 1, 5)
+        c7 = (2, 3, 5)
+        c8 = (0, 2, 5)
+
+        self._caras = [c1, c2, c3, c4, c5, c6, c7, c8]
+
+        # Llamamos al nuevo método de renderizado
+        self.dibujarPorCaras(display, self._caras)
+
+        if len(self._puntosScanline):
+            self._pintarPuntos(display)
+            return
+
+        self._proyectar()
+        self._pintarPuntos(display)
 
     def figura6(self):
         import math
