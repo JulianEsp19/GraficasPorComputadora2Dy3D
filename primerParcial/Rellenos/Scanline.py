@@ -1,3 +1,4 @@
+import pygame
 from pygame import SurfaceType
 from primerParcial.Figuras.LineaDDA import LineaDDA
 
@@ -74,8 +75,8 @@ class Scanline():
          valoresEcuacionDeRecta = m y b de la ecuacion de la recta donde si es Falso es una linea totalmente vertical
         """
 
-        linea = LineaDDA()
-        linea.setColor(self.__color)
+        #linea = LineaDDA()
+        #linea.setColor(self.__color)
 
         while True:
             valoresXAux = []
@@ -97,7 +98,8 @@ class Scanline():
                     continue
                 punto1 = (valoresXAux[i], scanline)
                 punto2 = (valoresXAux[i + 1], scanline)
-                linea.setCoordenadas(punto1, punto2)
-                linea.dibujar(display)
+                #linea.setCoordenadas(punto1, punto2)
+                #linea.dibujar(display)
+                pygame.draw.line(display, self.__color, punto1, punto2)
 
             scanline += 1

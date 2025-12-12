@@ -127,7 +127,7 @@ class __BaseFiguras3D:
 
         return matrizResultante
 
-    def __calcularCentro(self):
+    def _calcularCentro(self):
         x, y, z = 0, 0, 0
         for i in self._puntos3D:
             x += i[0]
@@ -200,7 +200,7 @@ class __BaseFiguras3D:
             ]
 
 
-        centro = self.__calcularCentro()
+        centro = self._calcularCentro()
 
         nuevosPuntos = []
 
@@ -217,7 +217,7 @@ class __BaseFiguras3D:
 
         self._puntos3D = nuevosPuntos
 
-        nuevoCentro = self.__calcularCentro()
+        nuevoCentro = self._calcularCentro()
 
         self.traslacion(-(nuevoCentro[0] - centro[0]), (nuevoCentro[1]-centro[1]), -(nuevoCentro[2]-centro[2]))
 
@@ -233,7 +233,7 @@ class __BaseFiguras3D:
             [0, 0, 0, 1]
         ]
 
-        centro = self.__calcularCentro()
+        centro = self._calcularCentro()
 
         nuevosPuntos = []
 
@@ -250,6 +250,6 @@ class __BaseFiguras3D:
 
         self._puntos3D = nuevosPuntos
 
-        nuevoCentro = self.__calcularCentro()
+        nuevoCentro = self._calcularCentro()
 
         self.traslacion(-(nuevoCentro[0] - centro[0]), (nuevoCentro[1] - centro[1]), -(nuevoCentro[2] - centro[2]))

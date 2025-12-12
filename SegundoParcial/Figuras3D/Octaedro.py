@@ -1,8 +1,5 @@
-import math
-
 from pygame import SurfaceType
 
-from SegundoParcial.Figuras3D import Ejes
 from SegundoParcial.Figuras3D.__BaseFiguras3D import __BaseFiguras3D
 from primerParcial.Figuras.LineaDDA import LineaDDA
 
